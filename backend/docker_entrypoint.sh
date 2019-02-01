@@ -3,6 +3,7 @@ set -e
 
 rm -f /app/tmp/pids/server.pid
 
-bundle exec rake db:migrate 2>/dev/null || bundle exec rake db:create
+bundle install
+bundle exec rails db:migrate 2>/dev/null || bundle exec rails db:create db:migrate db:seed
 
 exec bundle exec "$@"
