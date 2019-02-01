@@ -1,0 +1,23 @@
+{
+  "defaultSeverity": "error",
+  "extends": [
+    "tslint-config-standard",
+    "tslint-config-prettier"
+  ],
+  "rules": {
+    "prettier": true,
+    "prefer-const": true,
+    "no-console": false
+  },
+  "rulesDirectory": [
+    "tslint-plugin-prettier"
+  ],
+  "linterOptions": {
+    "exclude": [
+      "node_modules/**",
+      "dist/**",
+      ".nuxt/**",
+      "test/**"
+    ]
+  }
+}
