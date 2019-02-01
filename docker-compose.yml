@@ -35,6 +35,22 @@ services:
       DATABASE_PASSWORD: password
     depends_on:
       - db
+  frontend:
+    <<: *base
+    build:
+      context: ./frontend
+    command: yarn run dev
+    ports:
+      - "10081:3000"
+    volumes:
+      - ./frontend:/app
+    environment:
+      NODE_ENV: development
+      API_BASE_URL: localhost:10080
+      HOST: 0.0.0.0 # make it visible on the host machine
+      PORT: 3000
+    depends_on:
+      - backend
 volumes:
   mysql-data:
     driver: local
