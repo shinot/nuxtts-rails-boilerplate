@@ -1,0 +1,44 @@
+version: '3.4'
+
+x-template: &base
+  networks:
+    - docker-network
+  restart: always
+  tty: true
+  stdin_open: true
+
+services:
+  db:
+    <<: *base
+    image: mysql:5.7
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci
+    ports:
+      - "13306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+  backend:
+    <<: *base
+    build:
+      context: backend
+    command: /bin/sh -c "rm -f /app/tmp/pids/server.pid && bundle exec rails s -b 0.0.0.0 -p 10080"
+    ports:
+      - "10080:10080"
+    volumes:
+      - ./backend:/app
+      - bundle:/usr/local/bundle
+    environment:
+      RAILS_ENV: development
+      DATABASE_HOST: db
+      DATABASE_PASSWORD: password
+    depends_on:
+      - db
+volumes:
+  mysql-data:
+    driver: local
+  bundle:
+    driver: local
+networks:
+  docker-network:
+    driver: bridge
