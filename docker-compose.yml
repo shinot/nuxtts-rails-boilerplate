@@ -46,7 +46,7 @@ services:
       - ./frontend:/app
     environment:
       NODE_ENV: development
-      API_BASE_URL: localhost:10080
+      API_BASE_URL: http://localhost:10080
       HOST: 0.0.0.0 # make it visible on the host machine
       PORT: 3000
     depends_on:

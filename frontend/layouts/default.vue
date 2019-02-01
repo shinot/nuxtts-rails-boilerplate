@@ -102,6 +102,11 @@ export default {
           icon: 'bubble_chart',
           title: 'Inspire',
           to: '/inspire'
+        },
+        {
+          icon: 'list',
+          title: 'Todos',
+          to: '/todos'
         }
       ],
       miniVariant: false,
