@@ -12,7 +12,10 @@ export const mutations = {
 
 export const actions = {
   async fetch({ commit }) {
-    const todos: Todo[] = await (this as any).$axios.$get('/todos.json')
-    commit('set', todos)
+    await (this as any).$axios.$get('/todos.json').then(response => {
+      commit('set', response)
+    })
   }
 }
+
+export default { state, mutations, actions }
