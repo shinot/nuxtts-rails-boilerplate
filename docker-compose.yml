@@ -22,7 +22,8 @@ services:
     <<: *base
     build:
       context: backend
-    command: /bin/sh -c "rm -f /app/tmp/pids/server.pid && bundle exec rails s -b 0.0.0.0 -p 10080"
+    entrypoint: /app/docker_entrypoint.sh
+    command: bundle exec rails s -b 0.0.0.0 -p 10080
     ports:
       - "10080:10080"
     volumes:
